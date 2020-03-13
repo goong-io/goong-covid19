@@ -1,6 +1,5 @@
-import {Box, Input} from '@chakra-ui/core';
 import React from 'react';
-
+import {AutoComplete} from 'antd';
 export default function Search () {
-    return <Input placeholder="Search for place" />
+    return <AutoComplete/>
 }

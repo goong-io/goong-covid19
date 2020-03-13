@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import MapGL, { Marker } from '@goongmaps/goong-map-react';
+import MapGL, { Marker, NavigationControl, GeolocateControl } from '@goongmaps/goong-map-react';
 import pin from '../assets/virus.png';
 
 
@@ -60,6 +60,9 @@ class Map extends PureComponent {
                 onViewportChange={this._onViewportChange}
                 onClick={this._onClick}
             >
+                <div style={{ position: 'absolute', right: 10, top: 30 }}>
+                    <NavigationControl />
+                </div>
                 {this.props.points.length > 0 ? <Markers data={this.props.points} /> : null}
 
             </MapGL>
