@@ -1,39 +1,91 @@
-import React, { Component } from "react"
-import { Card, Button } from 'antd';
-
-
+import React from "react";
+import "antd/dist/antd.css";
+import { Card, List, Layout } from "antd";
 class IntroParagraph extends React.Component {
-    render() {
-        return (
-            <div className="site-card-border-less-wrapper">
+    state = {
+        key: "tab1",
+        noTitleKey: "app",
+        data: null
+    };
 
-                <Card title="Tracking Coronavirus - COVID-19" bordered={false}>
-                    <p>
-                        Ca nhiễm Corunavirus đầu tiên được ghi nhận vào 31 tháng 12 tại Vũ Hán - Trung Quốc (
-                <a href="https://www.who.int/emergencies/diseases/novel-coronavirus-2019" target='_blank'>
-                            {"WHO"}
-                        </a>                        
-                        ).
-                        <p></p>
-                         Tính đến nay, đã có {this.props.worldCases} ca nhiễm trên toàn thế giới, {this.props.vnCases} ca nhiễm ở Việt Nam. Trang web này hiển thị thông tin số ca nhiễm cập nhật liên tục từ 
-        <a href="https://ncov.moh.gov.vn">
-                            {"Bộ Y Tế. "}
-                        </a>
-                        <p></p>
-                        {`Thông tin trên bản đồ hiển thị các khu vực có nguy cơ lây nhiễm cao! `}
-                        <p></p>
-                        {`Tìm hiểu thêm cách chúng tôi xây dựng bản đồ này `}
-                        <a href="https://blog.goong.io"
-                        >
-                            {"Xây dựng bản đồ Coronavirus với Goong Maps"}
-                        </a>
-                    </p>
-                </Card>
-            </div>
+    onTabChange = (key, type) => {
+        this.setState({ [type]: key });
+    };
+    _item = (data) => {
+        return (
+            ["Số ca nhiễm: " + data.cases,
+            "Số ca tử vong: " + data.deaths,
+            "Số ca hồi phục: " + data.recovered
+            ]
         )
     }
+    render() {
+        const tabList = [
+            {
+                key: "tab1",
+                tab: "Việt Nam"
+            },
+            {
+                key: "tab2",
+                tab: "Thế Giới"
+            }
+        ];
+        const vn = this.props.data.vietnam;
+        const global = this.props.data.global;
+      
+        const contentList = {
+            tab1: (
+                <p>
+                    <List
+                        size="small"
+                        dataSource={this._item(vn)}
+                        renderItem={item => <List.Item>{item}</List.Item>}
+                    />
+                </p>
+            ),
+            tab2: (
+                <p>
+                    <List
+                        size="small"
+                        dataSource={this._item(global)}
+                        renderItem={item => <List.Item>{item}</List.Item>}
+                    />
+                </p>
+            )
+        };
 
-
-
+        return (
+            <div>
+                <Card
+                    style={{ width: "100%", backgroundColor: "white" }}
+                    title="Vietnam COVID 19 TRACKING"
+                    headStyle={{
+                        border: 0,
+                        color: "#424242",
+                        fontWeight: "bold",
+                        fontFamily: "Andika"
+                    }}
+                    bodyStyle={{
+                        border: 0,
+                        color: "#81c784",
+                        fontWeight: "medium"
+                    }}
+                    tabList={tabList}
+                    onTabChange={key => {
+                        this.onTabChange(key, "key");
+                    }}
+                >
+                    {contentList[this.state.key]}
+                    <Layout style={{ color: "darkGray", backgroundColor: "white" }}>
+                        <p>
+                            Last updated on 13/3/2020 from{" "}
+                            <a href="https://ncov.moh.gov.vn">MOH</a>
+                        </p>
+                        <p>&copy; Goong Maps 2019</p>
+                    </Layout>
+                </Card>
+            </div>
+        );
+    }
 }
-export default IntroParagraph
+export default IntroParagraph;

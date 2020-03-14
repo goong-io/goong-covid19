@@ -8,7 +8,7 @@ class Markers extends PureComponent {
         const { data } = this.props;
         return data.map(
             location =>
-                <Marker key={location.location_name} longitude={location.lon} latitude={location.lat} offsetLeft={-17.5} offsetTop={-17.5}><img src={pin} /></Marker>
+                <Marker key={location.location_name} longitude={location.lon} latitude={location.lat} offsetLeft={-17} offsetTop={-17}><img src={pin} /></Marker>
         )
     }
 }
@@ -18,9 +18,9 @@ class Map extends PureComponent {
     state = {
         hoveredFeature: null,
         viewport: {
-            latitude: 16.119786,
-            longitude: 105.9491124,
-            zoom: 5.4,
+            latitude: 21.045113,
+            longitude: 105.841864,
+            zoom: 16,
             bearing: 0,
             pitch: 0
 
