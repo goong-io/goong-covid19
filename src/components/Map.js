@@ -31,21 +31,6 @@ class Map extends PureComponent {
 
     _onViewportChange = viewport => this.setState({ viewport });
 
-    _onClick = event => {
-        const features = event.features;
-
-        const hoveredFeature = features && features.find(f => f.layer.id === 'corona');
-
-        this._onViewportChange({
-            ...this.state.viewport,
-            longitude: hoveredFeature.geometry.coordinates[0],
-            latitude: hoveredFeature.geometry.coordinates[1],
-            zoom: 5,
-            transitionDuration: 500
-        });
-
-    };
-
     render() {
         const { viewport } = this.state;
 
@@ -58,7 +43,6 @@ class Map extends PureComponent {
                 goongApiAccessToken="yQHvg5nXZ4vx3gSMyrkZwT0NbRPIPzYMgDtBVh1r"
                 mapStyle="https://tiles.goong.io/assets/goong_map_dark.json"
                 onViewportChange={this._onViewportChange}
-                onClick={this._onClick}
             >
                 <div style={{ position: 'absolute', right: 10, top: 30 }}>
                     <NavigationControl />

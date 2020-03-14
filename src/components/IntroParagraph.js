@@ -1,11 +1,14 @@
 import React from "react";
 import "antd/dist/antd.css";
 import { Card, List, Layout } from "antd";
+
+
 class IntroParagraph extends React.Component {
+    
     state = {
         key: "tab1",
         noTitleKey: "app",
-        data: null
+        data: {"global":{"cases":"145816","deaths":"5438","recovered":"72550"},"vietnam":{"cases":"49","deaths":"0","recovered":"16"}}
     };
 
     onTabChange = (key, type) => {
@@ -20,6 +23,7 @@ class IntroParagraph extends React.Component {
         )
     }
     render() {
+       
         const tabList = [
             {
                 key: "tab1",
@@ -30,27 +34,21 @@ class IntroParagraph extends React.Component {
                 tab: "Thế Giới"
             }
         ];
-        const vn = this.props.data.vietnam;
-        const global = this.props.data.global;
-      
+        
         const contentList = {
             tab1: (
-                <p>
                     <List
                         size="small"
-                        dataSource={this._item(vn)}
+                        dataSource={this._item(this.state.data.vietnam)}
                         renderItem={item => <List.Item>{item}</List.Item>}
                     />
-                </p>
             ),
             tab2: (
-                <p>
                     <List
                         size="small"
-                        dataSource={this._item(global)}
+                        dataSource={this._item(this.state.data.global)}
                         renderItem={item => <List.Item>{item}</List.Item>}
                     />
-                </p>
             )
         };
 
@@ -87,5 +85,6 @@ class IntroParagraph extends React.Component {
             </div>
         );
     }
-}
+}                // <p>
+
 export default IntroParagraph;
