@@ -7,7 +7,7 @@ const axios = require('axios');
 
 class IntroParagraph extends React.Component {
     componentDidMount() {
-        axios.get(process.env.REACT_APP_API_TOTAL_COVID)
+        axios.get("https://us-central1-goong-v2.cloudfunctions.net/covid")
             .then(response => {
                 this.setState({ data: response.data.data })
             })

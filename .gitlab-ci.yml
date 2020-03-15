@@ -1,5 +1,7 @@
 image: rambabusaravanan/firebase
-
+before_script:
+  - chmod +x ./setup_env.sh
+  - ./setup_env.sh
 stages:
   - deploy
 
