@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import MapGL, { Marker, NavigationControl, GeolocateControl } from '@goongmaps/goong-map-react';
+import MapGL, { Marker, NavigationControl } from '@goongmaps/goong-map-react';
 import pin from '../assets/virus.png';
 
 
@@ -8,7 +8,7 @@ class Markers extends PureComponent {
         const { data } = this.props;
         return data.map(
             location =>
-                <Marker key={location.location_name} longitude={location.lon} latitude={location.lat} offsetLeft={-17} offsetTop={-17}><img src={pin} /></Marker>
+                <Marker key={location.location_name} longitude={location.lon} latitude={location.lat} offsetLeft={-17} offsetTop={-17}><img alt="virus_marker" src={pin} /></Marker>
         )
     }
 }
@@ -18,9 +18,9 @@ class Map extends PureComponent {
     state = {
         hoveredFeature: null,
         viewport: {
-            latitude: 21.045113,
-            longitude: 105.841864,
-            zoom: 16,
+            latitude: 16.510187,
+            longitude: 105.649740,
+            zoom: 5.2,
             bearing: 0,
             pitch: 0
 
@@ -40,7 +40,7 @@ class Map extends PureComponent {
                 width="100vw"
                 height="100vh"
                 minZoom={1}
-                goongApiAccessToken="yQHvg5nXZ4vx3gSMyrkZwT0NbRPIPzYMgDtBVh1r"
+                goongApiAccessToken={process.env.REACT_APP_GOONG_MAP_TILES_KEY}
                 mapStyle="https://tiles.goong.io/assets/goong_map_dark.json"
                 onViewportChange={this._onViewportChange}
             >

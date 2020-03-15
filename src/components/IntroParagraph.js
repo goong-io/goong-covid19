@@ -1,15 +1,26 @@
 import React from "react";
 import "antd/dist/antd.css";
 import { Card, List, Layout } from "antd";
+import Listing from './Listing';
 
+const axios = require('axios');
 
 class IntroParagraph extends React.Component {
-    
-    state = {
-        key: "tab1",
-        noTitleKey: "app",
-        data: {"global":{"cases":"145816","deaths":"5438","recovered":"72550"},"vietnam":{"cases":"49","deaths":"0","recovered":"16"}}
-    };
+    componentDidMount() {
+        axios.get(process.env.REACT_APP_API_TOTAL_COVID)
+            .then(response => {
+                this.setState({ data: response.data.data })
+            })
+    }
+    constructor(props) {
+        super(props);
+        this.state = {
+            key: "tab1",
+            noTitleKey: "app",
+            data: null
+        };
+    }
+
 
     onTabChange = (key, type) => {
         this.setState({ [type]: key });
@@ -23,7 +34,6 @@ class IntroParagraph extends React.Component {
         )
     }
     render() {
-       
         const tabList = [
             {
                 key: "tab1",
@@ -34,21 +44,23 @@ class IntroParagraph extends React.Component {
                 tab: "Thế Giới"
             }
         ];
-        
+        const vn = this.state.data ? this.state.data.vietnam : null;
+        const global = this.state.data ? this.state.data.global : null;
+
         const contentList = {
             tab1: (
-                    <List
-                        size="small"
-                        dataSource={this._item(this.state.data.vietnam)}
-                        renderItem={item => <List.Item>{item}</List.Item>}
-                    />
+                <List
+                    size="small"
+                    dataSource={vn ? this._item(vn) : []}
+                    renderItem={item => <List.Item style={{ fontWeight: 'bold' }}>{item}</List.Item>}
+                />
             ),
             tab2: (
-                    <List
-                        size="small"
-                        dataSource={this._item(this.state.data.global)}
-                        renderItem={item => <List.Item>{item}</List.Item>}
-                    />
+                <List
+                    size="small"
+                    dataSource={global ? this._item(global) : []}
+                    renderItem={item => <List.Item style={{ fontWeight: 'bold' }}>{item}</List.Item>}
+                />
             )
         };
 
@@ -61,7 +73,6 @@ class IntroParagraph extends React.Component {
                         border: 0,
                         color: "#424242",
                         fontWeight: "bold",
-                        fontFamily: "Andika"
                     }}
                     bodyStyle={{
                         border: 0,
@@ -73,18 +84,21 @@ class IntroParagraph extends React.Component {
                         this.onTabChange(key, "key");
                     }}
                 >
-                    {contentList[this.state.key]}
+                    {this.state.data ? contentList[this.state.key] : 'Loading...'}
+                    <Listing />
+                    <br />
+
                     <Layout style={{ color: "darkGray", backgroundColor: "white" }}>
                         <p>
-                            Last updated on 13/3/2020 from{" "}
-                            <a href="https://ncov.moh.gov.vn">MOH</a>
+                            Last updated on {new Date().toLocaleDateString("vi-VN")} from {" "}
+                            <a href="https://ncov.moh.gov.vn" target='_blank' rel="noopener noreferrer">MOH</a>
                         </p>
-                        <p>&copy; Goong Maps 2019</p>
+                        <p>&copy; Goong.io 2019</p>
                     </Layout>
                 </Card>
             </div>
         );
     }
-}                // <p>
+}
 
 export default IntroParagraph;
