@@ -1,7 +1,6 @@
 image: rambabusaravanan/firebase
 before_script:
-  - chmod +x ./setup_env.sh
-  - ./setup_env.sh
+  - 'echo REACT_APP_GOONG_MAP_TILES_KEY=$REACT_APP_GOONG_MAP_TILES_KEY >> .env'
 stages:
   - deploy
 
