@@ -1,6 +1,6 @@
 image: rambabusaravanan/firebase
 before_script:
-  - 'echo REACT_APP_GOONG_MAP_TILES_KEY=$REACT_APP_GOONG_MAP_TILES_KEY >> .env'
+  - echo "REACT_APP_GOONG_MAP_TILES_KEY=$REACT_APP_GOONG_MAP_TILES_KEY >> .env"
 stages:
   - deploy
 
