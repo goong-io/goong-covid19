@@ -1062,10 +1062,10 @@
     tinyqueue "^2.0.0"
     vt-pbf "^3.1.1"
 
-"@goongmaps/goong-map-react@^1.0.2":
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/@goongmaps/goong-map-react/-/goong-map-react-1.0.2.tgz#b0e6259ead6f2bb9f95bf59a2c6a71a8e4f7d1b0"
-  integrity sha512-xaIRLP6P/+mxR+9hT2aiwccFlDBYff6erdQvcR3gVthHdtgaeZL1k1WSsnLt8s4sfpyQycQwAAZUC2Tt0m+CwA==
+"@goongmaps/goong-map-react@^1.0.4":
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/@goongmaps/goong-map-react/-/goong-map-react-1.0.4.tgz#757da789e75b62552e4080bff5e2f5c6b832dadd"
+  integrity sha512-Y/evyIvFMp9PzkJ0pUT6+KfW8+u7epJMFMwW3NrG/87Wm30ap0bWGnAlJAOaOXxSDrskWsleonGDebxbTLgZDA==
   dependencies:
     "@babel/runtime" "^7.0.0"
     "@goongmaps/goong-js" "^1.0.2"
