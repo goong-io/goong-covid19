@@ -65,7 +65,7 @@ class IntroParagraph extends React.Component {
         };
 
         return (
-            <div>
+            <div style={{ overflow: 'auto', maxHeight: '95vh' }}>
                 <Card
                     style={{ width: "100%", backgroundColor: "white" }}
                     title="Vietnam COVID 19 TRACKING"
@@ -91,7 +91,7 @@ class IntroParagraph extends React.Component {
                     <Layout style={{ color: "darkGray", backgroundColor: "white" }}>
                         <p>
                             Last updated on {new Date().toLocaleDateString("vi-VN")} from {" "}
-                            <a href="https://ncov.moh.gov.vn" target='_blank' rel="noopener noreferrer">MOH</a>
+                            <a href="https://ncov.moh.gov.vn" target='_blank' rel="noopener noreferrer"> <br />Ministry Of Health</a>
                         </p>
                         <p>&copy; Goong.io 2019</p>
                     </Layout>
