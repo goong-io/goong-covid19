@@ -8,7 +8,7 @@ class Markers extends PureComponent {
         const { data } = this.props;
         return data.map(
             location =>
-                <Marker key={location.lat,location.lon} longitude={location.lon} latitude={location.lat} offsetLeft={-17} offsetTop={-43}><img alt="virus_marker" src={pin} /></Marker>
+                <Marker key={location.lat + "," + location.lon} longitude={location.lon} latitude={location.lat} offsetLeft={-17} offsetTop={-43}><img alt="virus_marker" src={pin} /></Marker>
         )
     }
 }
