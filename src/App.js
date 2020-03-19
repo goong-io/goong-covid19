@@ -20,7 +20,7 @@ function App() {
         </div>
         <div style={{ display: 'block', position: 'fixed', backgroundColor: "white", top: 12, left: 12, borderRadius: '10px'}} width='250'>
           <IntroParagraph />
-        </div>
+        </div>        
       </div>
     </>
   );
