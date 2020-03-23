@@ -1,22 +1,11 @@
 import React, { PureComponent } from 'react';
-import MapGL, { Marker, NavigationControl } from '@goongmaps/goong-map-react';
+import MapGL, { Marker, NavigationControl, Popup } from '@goongmaps/goong-map-react';
 import pin from '../assets/virus.png';
 import Geocoder from '@goongmaps/goong-geocoder-react';
 import '@goongmaps/goong-geocoder/dist/goong-geocoder.css';
-class Markers extends PureComponent {
-    render() {
-        const { data } = this.props;
-        return data.map(
-            location =>
-                <Marker key={location.lat + "," + location.lon} longitude={location.lon} latitude={location.lat} offsetLeft={-17} offsetTop={-43}><img alt="virus_marker" src={pin} /></Marker>
-        )
-    }
-}
-
 
 class Map extends PureComponent {
     state = {
-        hoveredFeature: null,
         viewport: {
             latitude: 16.510187,
             longitude: 105.649740,
@@ -24,13 +13,47 @@ class Map extends PureComponent {
             bearing: 0,
             pitch: 0
 
-        }
+        },
+        popupInfo: null
     };
 
     mapRef = React.createRef();
 
     _onViewportChange = viewport => this.setState({ viewport });
+    _renderMarker = (data) => {
+        return data.map(
+            (location, index) =>
+                <Marker key={`marker-${index}`}
+                    longitude={location.lon}
+                    latitude={location.lat}
+                    offsetLeft={-17}
+                    offsetTop={-43}
+                >
+                    <img alt="virus_marker"
+                        src={pin}
+                        onClick={() => this.setState({ popupInfo: location })} />
+                </Marker>
+        )
+    }
+    _renderPopup() {
+        const { popupInfo } = this.state;
 
+        return (
+            popupInfo && (
+                <Popup
+                    offsetTop={-43}
+                    tipSize={5}
+                    anchor="bottom"
+                    longitude={popupInfo.lon}
+                    latitude={popupInfo.lat}
+                    closeOnClick={false}
+                    onClose={() => this.setState({ popupInfo: null })}
+                >
+                    <p>{popupInfo.location_name}</p>
+                </Popup>
+            )
+        );
+    }
     render() {
         const { viewport } = this.state;
 
@@ -45,6 +68,8 @@ class Map extends PureComponent {
                 mapStyle="https://tiles.goong.io/assets/goong_map_web.json"
                 onViewportChange={this._onViewportChange}
             >
+                {this.props.points.length > 0 ? this._renderMarker(this.props.points) : null}
+                {this._renderPopup()}
                 <div style={{ position: 'absolute', right: 15, bottom: 30 }}>
                     <NavigationControl />
                 </div>
@@ -53,7 +78,6 @@ class Map extends PureComponent {
                     onViewportChange={this._onViewportChange}
                     goongApiAccessToken={process.env.REACT_APP_GOONG_API_KEY}
                 />
-                {this.props.points.length > 0 ? <Markers data={this.props.points} /> : null}
 
             </MapGL>
         );
