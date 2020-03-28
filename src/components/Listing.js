@@ -6,7 +6,7 @@ const axios = require('axios');
 
 export default class Listing extends React.Component {
   componentDidMount() {
-    axios.get("https://us-central1-goong-v2.cloudfunctions.net/vietnam")
+    axios.get("https://maps.vnpost.vn/app/api/democoronas/?format=json")
       .then(response => {
         // handle success
         let data = response.data
