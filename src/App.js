@@ -9,7 +9,7 @@ import 'antd/dist/antd.css';
 
 
 function App() {
-  const { data, err } = useSWR(`https://ncovi.vnpt.vn/canhbaovungdich`, fetcher, { focusThrottleInterval: 60000 })
+  const { data, err } = useSWR(`https://us-central1-goong-v2.cloudfunctions.net/benhnhan`, fetcher, { focusThrottleInterval: 60000 })
   const points = data ? (data.data || []) : []
   if (err) console.log(err);
   return (

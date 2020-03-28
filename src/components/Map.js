@@ -24,7 +24,7 @@ class Map extends PureComponent {
         return data.map(
             (location, index) =>
                 <Marker key={`marker-${index}`}
-                    longitude={location.lon}
+                    longitude={location.lng}
                     latitude={location.lat}
                     offsetLeft={-17}
                     offsetTop={-43}
@@ -44,12 +44,18 @@ class Map extends PureComponent {
                     offsetTop={-43}
                     tipSize={5}
                     anchor="bottom"
-                    longitude={popupInfo.lon}
+                    longitude={popupInfo.lng}
                     latitude={popupInfo.lat}
                     closeOnClick={false}
                     onClose={() => this.setState({ popupInfo: null })}
                 >
-                    <p>{popupInfo.location_name}</p>
+                    <div className="goong-popup" style={{ width: '300px' }}>
+                        <div style={{ marginBottom: '5px' }}><strong> Tên: </strong>{popupInfo.name}</div>
+                        <div style={{ marginBottom: '5px' }}><strong> Địa chỉ: </strong>{popupInfo.address}</div>
+                        <div style={{ marginBottom: '5px' }}><strong> Thời gian: </strong>{new Date(popupInfo.verifyDate).toLocaleDateString('vi-vn')}</div>
+                        <div> <strong>Ghi chú:</strong></div>
+                        <p style={{ marginLeft: '15px', marginTop: '0px' }}>{popupInfo.note}</p>
+                    </div>
                 </Popup>
             )
         );
